@@ -31,7 +31,7 @@ define('blog.render', function () {
     var $title = $('#title:not(.in)');
     if ($title.length > 0) {
       $title.ht('<a href="{{url}}">{{text}}</a>', {
-        url: ENV.BASE_URL,
+        url: ENV.HASH_CAP,
         text: ENV.config.title || 'NO TITLE'
       }).set('$', '+in');
       $('#subtitle').fill(ENV.config.subtitle || '').set('$', '+in');
