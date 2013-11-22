@@ -180,7 +180,11 @@ define('blog.render', function () {
     var metas = yamlminus.parse(text.substring(0, pos));
     metas.content = marked(text.substring(pos).replace(delimiter, ''));
     var $content = $('#content');
-    if (metas.created) {
+    if (metas.created && metas.modified) {
+      var created = new Date(metas.created);
+      var modified = new Date(metas.modified);
+      metas.created = created.toString();
+      metas.modified = modified.toString();
       $content.ht(ENV.templates_.article, metas);
     } else {
       $content.ht(ENV.templates_.page, metas);
