@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-Frame-Options" content="deny">
+    <meta http-equiv="X-XSS-Protection" content="1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <meta charset="utf-8">
+    <link href="favicon.png" rel="icon">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Petit+Formal+Script" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Andada" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Quattrocento:400,700" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+
+      <div id="header" class="page-header">
+        <h1 id="title" class="fade">Auf Wiedersehen!</h1>
+        <p id="subtitle" class="muted fade"></p>
+        <div class="clearfix"></div>
+      </div>  <!-- end id=header --> 
+
+      <div id="body" class="row-fluid">
+
+        <div id="sidebar-left" class="sidebar-nav span2">
+          <ul class="nav nav-list">
+            <li class="nav-header">What's new?</li>
+            <li>Welcome to my blog!</li>
+            <li class="divider"></li>
+            <li id="menu" class="nav-header">Menu</li>
+            <li class="nav-header">License</li>
+            <li><small id="license"></small></li>
+            <li class="navigator divider shrink fade"></li>
+            <li class="navigator nav-header shrink fade">Navigator</li>
+            <li class="navigator shrink fade">
+              <ul class="pager">
+                <li class="previous">
+                  <a href="#@prev" class="btn btn-link">Older</a>
+                </li>
+                <li class="next">
+                  <a href="#@next" class="btn btn-link">Newer</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>  <!-- end id=sidebar-left --> 
+
+        <div id="main" class="span8">
+          <div>
+            <div class="progress progress-striped active fade">
+              <div class="bar">
+                <p>Loading...<i class="icon-random"></i></p>
+              </div>
+            </div>
+            <div id="content"></div>
+            <div class="clearfix"></div>
+            <div class="comments hide"></div>
+            <div class="theme-author">
+              <p class="muted pull-right">Theme Milky created by Jak Wings</p>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>  <!-- end id=main --> 
+
+        <div id="sidebar-right" class="sidebar-nav span2">
+          <div>
+            <ul class="nav nav-list">
+              <li class="nav-header">Subscribe</li>
+              <li id="feed" title="not available now">
+                <a href="feed.xml" type="application/rss+xml" rel="alternate" target="_blank">
+                  <img src="img/feed_gray.png">
+                  <!-- caching -->
+                  <img class="hide" src="img/feed.png">
+                </a>
+              </li>
+              <li id="share-list" class="dropdown">
+                <a class="dropdown-toggle" href="#share-list">
+                  Share
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#@share-google">Google+</a></li>
+                  <li><a href="#@share-twitter">Twitter</a></li>
+                </ul>
+              </li>
+              <li>to share with friends?</li>
+              <li id="links" class="nav-header">Links</li>
+            </ul>
+          </div>
+        </div>  <!-- end id=sidebar-right --> 
+
+        <div class="clearfix"></div>
+      </div>  <!-- end id=body --> 
+
+      <div id="footer">
+        <div class="theme-author">
+          <p class="muted pull-right">Theme Milky created by Jak Wings</p>
+          <div class="clearfix"></div>
+        </div>
+      </div>  <!-- end id=footer -->
+
+    </div>
+    <!-- Core modules -->
+    <script src="js/lib/minified.js"></script>
+    <!-- Basic modules -->
+    <script src="js/lib/yamlminus.js"></script>
+    <script src="js/lib/marked.js"></script>
+    <!-- Initiator -->
+    <script src="js/app.js"></script>
+    <!-- Blog modules -->
+    <script src="js/blog/config.js"></script>
+      <!-- These files should be packed together. -->
+      <script src="js/blog/templates.js"></script>
+      <script src="js/blog/render.js"></script>
+      <script src="js/blog/core.js"></script>
+    <!-- USER DATA -->
+    <div class="hide">
+      <!-- Article List (items in ascending order by date) -->
+      <ul id="-article-list">
+        <li data-file="i/o/20131111_01" data-url="i/o/helloworld">
+          Hello，世界！
+        </li>
+        <li data-file="i/o/20131111_02" data-url="i/o/helloworld2">
+          你好，世界！（不存在）
+        </li>
+        <li data-file="i/o/20131112_01" data-url="i/o/helloworld3">
+          你好，世界！（不存在）
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
