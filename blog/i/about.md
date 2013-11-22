@@ -93,7 +93,7 @@ title: 关于该静态博客系统
 
     ![图：开始页面。](data/images/feed01.png)
 
-2.  在「Address」一栏填写 `js/blog/config.js` 文件对应的完整 URL ，即指定了文章列表信息的提取来源，然后在「Encoding」一栏指定内容编码为「utf-8」。按「Reload」按钮继续。
+2.  在「Address」一栏填写 `index.html` 文件对应的完整 URL ，即指定了文章列表信息的提取来源，然后在「Encoding」一栏指定内容编码为「utf-8」。按「Reload」按钮继续。
 
     ![图：文章提取来源地址。](data/images/feed02.png)
 
