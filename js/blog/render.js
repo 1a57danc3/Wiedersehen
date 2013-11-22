@@ -282,7 +282,11 @@ define('blog.render', function () {
     setDocumentTitle('404 NOT FOUND - ' + ENV.config.title);
     var $button = EE('button', {'$': 'btn btn-link'}, 'click here to go back').
         on('click', function () {
-          window.history.back();
+          if (window.history.length > 1) {
+            window.history.back();
+          } else {
+            goHome(newHash, ENV.HASH_CAP);
+          }
         });
     $('#content').ht('<h1 class="muted">404 Not found</h1>').add($button);
   };
