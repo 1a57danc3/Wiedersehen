@@ -246,6 +246,8 @@ define('blog.render', function () {
     setDocumentTitle();
     loadArticleTitles();
     switchMenuItem(newHash);
+    window.history.replaceState(window.history.state, document.title,
+        ENV.BASE_URL);
   };
   var goPage = function (oldHash, newHash) {
     ENV.DEBUG && console.log(arguments);
@@ -310,15 +312,11 @@ define('blog.render', function () {
     if (oldHash === newHash &&
         newHash.substr(0, ENV.HASH_CAP.length) !== ENV.HASH_CAP &&
         $('#content:empty').length > 0) {
-      window.history.replaceState(window.history.state, document.title,
-          ENV.BASE_URL);
       goHome(ENV.HASH_CAP, ENV.HASH_CAP);
     }
     // with hash tag of a page
     if (newHash.substr(0, ENV.HASH_CAP.length) === ENV.HASH_CAP) {
       if (newHash === ENV.HASH_CAP) {
-        window.history.replaceState(window.history.state, document.title,
-            ENV.BASE_URL);
         goHome(oldHash, newHash);
       } else {
         goPage(oldHash, newHash);
