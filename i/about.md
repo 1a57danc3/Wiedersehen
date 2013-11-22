@@ -4,7 +4,7 @@ title: 关于该静态博客系统
 
 ## 简介
 
-想必大家很想尽快了解这个简单的博客系统了。该博客系统的源代码在：https://github.com/jakwings/Wiedersehen
+想必大家很想尽快了解这个简单的博客系统了。该博客系统的源代码在：<https://github.com/jakwings/Wiedersehen>
 
 那么先来说说它的优缺点吧。
 
@@ -87,7 +87,7 @@ title: 关于该静态博客系统
 
 你可以用 [FEED43][] 免费提供的 feed 定制服务来为你的博客生成订阅链接：
 
-1.  到 http://feed43.com/feed.html?action=new 开始创建。
+1.  到 <http://feed43.com/feed.html?action=new> 开始创建。
 
     勾选「I agree to the Terms of Service」以同意 ToS 的内容，然后点击「Continue」按钮继续。
 
@@ -164,6 +164,7 @@ OK ，订阅链接生成教程就此完毕。
 *   代码高亮功能以及 LATEX 公式展示功能。
 *   在线 Markdown 文件编辑工具（不带图片插入功能）。
 *   本地博客管理工具（非命令行）。
+*   页面内容缓存功能（浏览器端）。
 *   添加特殊页面：幻灯片。
 
 无限期计划，主要看我个人的能力水平，因为我制作这个博客系统不单纯是为了分享，而且是练习所需。

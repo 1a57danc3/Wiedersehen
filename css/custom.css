@@ -151,6 +151,9 @@ body {
   font-family: "Andada", serif;
   font-size: 1rem;
 }
+#content article a {
+  word-break: break-all;
+}
 #content article h2,
 #content article h3,
 #content article h4,
