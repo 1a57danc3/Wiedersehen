@@ -110,31 +110,31 @@ define('blog.config', function () {
       //  window.DUOSHUO.EmbedThread(container);
       //}
 
-      //// disqus.com
-      //window.disqus_shortname = '';
-      //// DON'T EDIT BELOW THIS LINE
-      //if (!window.disqus_shortname) { return; }
-      //var document = window.document;
-      //if (!window.DISQUS) {
-      //  window.disqus_disable_mobile = false;
-      //  window.disqus_identifier = id;
-      //  window.disqus_url = url;
-      //  container.id = 'disqus_thread';
-      //  var dsq = document.createElement('script');
-      //  dsq.type = 'text/javascript';
-      //  dsq.async = true;
-      //  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      //  (document.getElementsByTagName('head')[0] ||
-      //      document.getElementsByTagName('body')[0]).appendChild(dsq);
-      //} else {
-      //  window.DISQUS.reset({
-      //    reload: true,
-      //    config: function () {
-      //      this.page.identifier = id;
-      //      this.page.url = url;
-      //    }
-      //  });
-      //}
+      // disqus.com
+      window.disqus_shortname = 'aufwiedersehen';
+      // DON'T EDIT BELOW THIS LINE
+      if (!window.disqus_shortname) { return; }
+      var document = window.document;
+      if (!window.DISQUS) {
+        window.disqus_disable_mobile = false;
+        window.disqus_identifier = id;
+        window.disqus_url = url;
+        container.id = 'disqus_thread';
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] ||
+            document.getElementsByTagName('body')[0]).appendChild(dsq);
+      } else {
+        window.DISQUS.reset({
+          reload: true,
+          config: function () {
+            this.page.identifier = id;
+            this.page.url = url;
+          }
+        });
+      }
     },
   };
 });
