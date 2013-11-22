@@ -31,7 +31,7 @@ define('blog.render', function () {
     var $title = $('#title:not(.in)');
     if ($title.length > 0) {
       $title.ht('<a href="{{url}}">{{text}}</a>', {
-        url: ENV.BASE_URL,
+        url: ENV.HASH_CAP,
         text: ENV.config.title || 'NO TITLE'
       }).set('$', '+in');
       $('#subtitle').fill(ENV.config.subtitle || '').set('$', '+in');
@@ -246,6 +246,8 @@ define('blog.render', function () {
     setDocumentTitle();
     loadArticleTitles();
     switchMenuItem(newHash);
+    window.history.replaceState(window.history.state, document.title,
+        ENV.BASE_URL);
   };
   var goPage = function (oldHash, newHash) {
     ENV.DEBUG && console.log(arguments);
@@ -282,7 +284,11 @@ define('blog.render', function () {
     setDocumentTitle('404 NOT FOUND - ' + ENV.config.title);
     var $button = EE('button', {'$': 'btn btn-link'}, 'click here to go back').
         on('click', function () {
-          window.history.back();
+          if (window.history.length > 1) {
+            window.history.back();
+          } else {
+            goHome(newHash, ENV.HASH_CAP);
+          }
         });
     $('#content').ht('<h1 class="muted">404 Not found</h1>').add($button);
   };
@@ -306,15 +312,11 @@ define('blog.render', function () {
     if (oldHash === newHash &&
         newHash.substr(0, ENV.HASH_CAP.length) !== ENV.HASH_CAP &&
         $('#content:empty').length > 0) {
-      window.history.replaceState(window.history.state, document.title,
-          ENV.BASE_URL);
       goHome(ENV.HASH_CAP, ENV.HASH_CAP);
     }
     // with hash tag of a page
     if (newHash.substr(0, ENV.HASH_CAP.length) === ENV.HASH_CAP) {
       if (newHash === ENV.HASH_CAP) {
-        window.history.replaceState(window.history.state, document.title,
-            ENV.BASE_URL);
         goHome(oldHash, newHash);
       } else {
         goPage(oldHash, newHash);

@@ -14,7 +14,7 @@ define('blog.templates', function () {
    */
   return {
     listTitle: '<li class="title"><a href="{{url}}">{{title}}</a></li>',
-    linkItem: '<li class="link-item"><a href="{{url}}">{{text}}</a></li>',
+    linkItem: '<li class="link-item"><a href="{{url}}" target="_blank">{{text}}</a></li>',
     menuItem: [
       '<li class="menu-item">',
         '<a href="{{url}}"><i class="icon-chevron-right"></i>{{text}}</a>',

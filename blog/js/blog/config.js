@@ -111,7 +111,7 @@ define('blog.config', function () {
       //}
 
       //// disqus.com
-      //window.disqus_shortname = '';
+      //window.disqus_shortname = 'aufwiedersehen';
       //// DON'T EDIT BELOW THIS LINE
       //if (!window.disqus_shortname) { return; }
       //var document = window.document;
