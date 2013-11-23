@@ -209,6 +209,9 @@ body {
   #sidebar-right {
     border-left: 1px solid #eeeeee;
   }
+  #sidebar-left .pager li a {
+    margin-bottom: 2px;
+  }
   #content {
     min-height: 400px;
   }

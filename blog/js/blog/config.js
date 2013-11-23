@@ -97,6 +97,8 @@ define('blog.config', function () {
       //if (!window.DUOSHUO) {
       //  window.duoshuoQuery = {short_name: duoshuo_shortname};
       //  container.className += ' ds-thread';
+      //  container.setAttribute('data-thread-key', id);
+      //  container.setAttribute('data-url', url);
       //  var ds = document.createElement('script');
       //  ds.type = 'text/javascript';ds.async = true;
       //  ds.src = 'http://static.duoshuo.com/embed.js';
@@ -105,9 +107,13 @@ define('blog.config', function () {
       //      || document.getElementsByTagName('body')[0]).appendChild(ds);
       //} else {
       //  container.innerHTML = '';
-      //  container.setAttribute('data-thread-key', id);
-      //  container.setAttribute('data-url', url);
-      //  window.DUOSHUO.EmbedThread(container);
+      //  var clone = document.createElement('div');
+      //  clone.id = 'ds-thread';
+      //  clone.className = 'comments hide';
+      //  clone.setAttribute('data-thread-key', id);
+      //  clone.setAttribute('data-url', url);
+      //  container.parentNode.replaceChild(clone, container);
+      //  window.DUOSHUO.EmbedThread(clone);
       //}
 
       //// disqus.com

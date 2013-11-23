@@ -37,10 +37,10 @@
             <li class="navigator shrink fade">
               <ul class="pager">
                 <li class="previous">
-                  <a href="#@prev" class="btn btn-link">Older</a>
+                  <a class="btn btn-link">Older</a>
                 </li>
                 <li class="next">
-                  <a href="#@next" class="btn btn-link">Newer</a>
+                  <a class="btn btn-link">Newer</a>
                 </li>
               </ul>
             </li>
@@ -75,17 +75,6 @@
                   <img class="hide" src="img/feed.png">
                 </a>
               </li>
-              <li id="share-list" class="dropdown">
-                <a class="dropdown-toggle" href="#share-list">
-                  Share
-                  <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="#@share-google">Google+</a></li>
-                  <li><a href="#@share-twitter">Twitter</a></li>
-                </ul>
-              </li>
-              <li>to share with friends?</li>
               <li id="links" class="nav-header">Links</li>
             </ul>
           </div>
@@ -101,20 +90,21 @@
         </div>
       </div>  <!-- end id=footer -->
 
-    </div>
-    <!-- Core modules -->
-    <script src="js/lib/minified.js"></script>
+    </div>  <!-- end class=container -->
+
     <!-- Basic modules -->
+    <script src="js/lib/minified.js"></script>
     <script src="js/lib/yamlminus.js"></script>
     <script src="js/lib/marked.js"></script>
     <!-- Initiator -->
     <script src="js/app.js"></script>
     <!-- Blog modules -->
     <script src="js/blog/config.js"></script>
-      <!-- These files should be packed together. -->
+      <!-- These files could be packed together to reduce load time. -->
       <script src="js/blog/templates.js"></script>
       <script src="js/blog/render.js"></script>
       <script src="js/blog/core.js"></script>
+
     <!-- USER DATA -->
     <div class="hide">
       <!-- Article List (items in ascending order by date) -->
@@ -338,13 +328,16 @@
         <li data-file="i/o/20131110_02" data-url="i/o/helloworldx">
           你好，世界！（不存在）
         </li>
-        <li data-file="i/o/20131111_01" data-url="i/o/helloworld">
+        <li data-file="i/o/20131111_01" data-url="i/o/helloworld2">
           Hello，世界！
         </li>
-        <li data-file="i/o/20131111_02" data-url="i/o/helloworldx">
+        <li data-file="i/o/20131111_02" data-url="i/o/helloworld3">
+          Hello，世界！
+        </li>
+        <li data-file="i/o/20131111_03" data-url="i/o/helloworldx">
           你好，世界！（不存在）
         </li>
       </ul>
-    </div>
+    </div>  <!-- end USER DATA -->
   </body>
 </html>
