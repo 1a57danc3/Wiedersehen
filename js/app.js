@@ -21,5 +21,5 @@ MINI.$(function () {
   marked = require('marked');
 
   var blog = require('blog');
-  blog.init(true);
+  blog.init();
 });
