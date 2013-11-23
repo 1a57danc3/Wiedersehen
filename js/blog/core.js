@@ -1,5 +1,5 @@
 /**
- * @fileoverview Blog utilities for routing and ajax managing.
+ * @fileoverview Blog utilities for routing.
  * @author Jak Wings
  * @license The MIT License (MIT)
  * @preserve Copyright (c) 2013 Jak Wings
@@ -12,7 +12,7 @@
   var isBrowser = typeof window !== 'undefined' && window.document;
   if (!isBrowser || !window.history || !window.history.replaceState) {
     define('blog', function () {
-      return {};
+      return {init: function () {}};
     });
     return;
   }
@@ -28,10 +28,9 @@
     this.BASE_URL = this.window.location.origin +
         this.window.location.pathname.replace(/\/*$/, '/');
     this.HASH_CAP = '#!/';  // prefix for pages hash tags
-    this.HASH_ACT = '#@';   // prefix for actions hash tags
   };
   /**
-   * Initiates and start rendering. It can be called only once.
+   * Initiates and starts rendering. It can be called only once.
    * @public
    * @param {boolean=} opt_debug opens debug mode?
    * @return {void}
@@ -71,7 +70,7 @@
      */
     this.render_ = require('blog.render');
 
-    // register router on HashChangeEvent
+    // registers router on HashChangeEvent
     this.window.addEventListener('hashchange', this.route_.bind(this), false);
     this.route_(this.window.location.hash);
 
@@ -79,7 +78,7 @@
     this.init = function () {};
   };
   /**
-   * Listen and routes URLs (with hash tags).
+   * Listens and routes URLs (with hash tags).
    * @private
    * @param {(Object|string)} evt HashChangeEvent or hash tag
    * @return {void}
@@ -97,7 +96,7 @@
       var oldHash = this.window.location.hash || this.HASH_CAP;
     }
     this.DEBUG && console.log(oldHash, newHash);
-    // wrap the environment (not cloning)
+    // wraps the environment (not cloning)
     var env = {};
     for (var k in this) {
       if (!(this[k] instanceof Function)) {

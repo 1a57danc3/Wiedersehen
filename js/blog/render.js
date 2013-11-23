@@ -116,9 +116,13 @@ define('blog.render', function () {
       hasPrev = getArticleUrlByOffset(opt_url, -1);
       hasNext = getArticleUrlByOffset(opt_url, 1);
       $navigator.select('.previous').
-          set('$', hasPrev ? '-disabled' : '+disabled');
+          set('$', hasPrev ? '-disabled' : '+disabled').
+          select('a').
+          set('@href', hasPrev ? ENV.HASH_CAP + hasPrev : '');
       $navigator.select('.next').
-          set('$', hasNext ? '-disabled' : '+disabled');
+          set('$', hasNext ? '-disabled' : '+disabled').
+          select('a').
+          set('@href', hasNext ? ENV.HASH_CAP + hasNext : '');
     }
     $navigator.set('$', (hasPrev || hasNext) ? '-shrink +in' : '+shrink -in');
   };
@@ -179,6 +183,7 @@ define('blog.render', function () {
     var url = newHash.substring(ENV.HASH_CAP.length);
     var fileUrl = getArticleFileUrl(url);
     if (fileUrl) {
+      setDocumentTitle('Loading...');
       $('#content').ht('<p class="muted">loading...</p>');
       var timestamp = Date.now();
       ajax_timestamp = timestamp;
@@ -239,12 +244,11 @@ define('blog.render', function () {
    * @return {void}
    */
   var togglePageComments = function (opt_url) {
-    ENV.DEBUG && opt_url && console.log(opt_url);
     var $comment = $('#main .comments');
     if (opt_url) {
       ENV.config.loadComment(window, $comment[0], opt_url,
           ENV.BASE_URL + ENV.HASH_CAP + opt_url);
-      $comment.set('$', '-hide');
+      $('#main .comments').set('$', '-hide');
     } else {
       $comment.set('$', '+hide').fill();
     }
@@ -267,7 +271,7 @@ define('blog.render', function () {
    * @param {string} url
    * @param {number=} opt_offset
    * @default 0
-   * @return {?string}
+   * @return {string}
    */
   var getArticleUrlByOffset = function (url, opt_offset) {
     var offset = parseInt(opt_offset, 10) || 0;
@@ -275,7 +279,7 @@ define('blog.render', function () {
     for (var i = 0, l = list.length; i < l; i++) {
       if (list[i].url === url) {
         var item = list[i+offset];
-        return item && item.url;
+        return (item && item.url) || '';
       }
     }
   };
@@ -283,7 +287,6 @@ define('blog.render', function () {
    * Handlers
    */
   var goHome = function (oldHash, newHash) {
-    ENV.DEBUG && console.log(arguments);
     var pathInfo = newHash.substr(ENV.HASH_CAP.length).split('/', 1);
     var pageNum = parseInt(pathInfo[0], 10) || 0;
     setDocumentTitle();
@@ -295,37 +298,9 @@ define('blog.render', function () {
     switchMenuItem(ENV.HASH_CAP);
   };
   var goPage = function (oldHash, newHash) {
-    ENV.DEBUG && console.log(arguments);
     loadPage(oldHash, newHash);
   };
-  var goShare = function (oldHash, newHash) {
-    ENV.DEBUG && console.log(arguments);
-  };
-  var goNavigator = function (oldHash, newHash) {
-    ENV.DEBUG && console.log(arguments);
-    var url = oldHash.substr(ENV.HASH_CAP.length);
-    var command = newHash.substr(ENV.HASH_ACT.length);
-    var newUrl;
-    switch (command) {
-      case 'prev':
-        newUrl = getArticleUrlByOffset(url, -1);
-        break;
-      case 'next':
-        newUrl = getArticleUrlByOffset(url, 1);
-        break;
-      default: break;
-    }
-    if (newUrl) {
-      goPage(newHash, ENV.HASH_CAP + newUrl);
-    } else {
-      goError(newHash,  ENV.HASH_CAP + newUrl);
-    }
-  };
-  var goEdit = function (oldHash, newHash) {
-    ENV.DEBUG && console.log(arguments);
-  };
   var goError = function (oldHash, newHash) {
-    ENV.DEBUG && console.log(arguments);
     setDocumentTitle('404 NOT FOUND - ' + ENV.config.title);
     var $button = EE('button', {'$': 'btn btn-link'}, 'click here to go back').
         on('click', function () {
@@ -367,19 +342,6 @@ define('blog.render', function () {
         goHome(oldHash, newHash);
       } else {
         goPage(oldHash, newHash);
-      }
-    } else if (newHash.substr(0, ENV.HASH_ACT.length) === ENV.HASH_ACT) {
-      // with hash tag of an action
-      switch (newHash.substr(ENV.HASH_ACT.length)) {
-        case 'prev':
-        case 'next':
-          goNavigator(oldHash, newHash); break;
-        case 'share-google':
-        case 'share-twitter':
-          goShare(oldHash, newHash); break;
-        case 'edit':
-          goEdit(oldHash, newHash); break;
-        default: break;
       }
     }
   };
