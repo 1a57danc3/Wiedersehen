@@ -39,6 +39,15 @@ body {
 }
 
 /* body */
+#sidebar-left,
+#sidebar-right {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+  top: 1em;
+}
 #sidebar-left .nav > li,
 #sidebar-right .nav > li {
   word-break: break-word;
