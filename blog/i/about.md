@@ -59,6 +59,7 @@ title: 关于该静态博客系统
 [OpenShift]: https://www.openshift.com "被和谐得简直成了一坨 Shit ……"
 [GitHub Pages]: http://pages.github.com "GitHub 提供的项目文档托管服务"
 
+
 ## 上传更新文章
 
 1.  首先修改 `index.html` 文件，搜索「USER DATA」找到文章列表信息，然后按照相同的格式增删内容便可。
@@ -80,6 +81,14 @@ title: 关于该静态博客系统
 3.  修改并创建了以上文件后，上传更新那些文件就 OK 了。
 
 [YAML]: http://yaml.org
+
+
+## 评论系统配置
+
+在 `js/blog/config.js` 里面有两段被注释掉的代码，一段是用来载入多说评论框的，另一段是用来载入 Disqus 评论框的。只要把其中一段前面的 `//` 去掉，然后填写好 `duoshuo_shortname` 或 `disqus_shortname` 的值就可以了。
+
+那两段代码是特制的，不要随便修改。
+
 
 ## 文章订阅配置
 
@@ -139,6 +148,7 @@ OK ，订阅链接生成教程就此完毕。
 
 [FEED43]: http://feed43.com
 
+
 ## 自行修改系统
 
 如果只是想汉化一下界面，直接在文件中搜索相关词语就可以尝试修改了。
@@ -150,11 +160,12 @@ OK ，订阅链接生成教程就此完毕。
 *   `js/blog/*.js`
 *   `js/app.js`
 
-其余文件皆为辅助用途。在此，我推荐用 [Minified][] 这个 JS 库来编写主题，因为默认主题的代码就是基于它的，这个 JS 库十分小巧易用。另外不用担心是否一定要熟悉 Minified 的使用，因为只有 `js/blog/render.js` 这个文件是使用到它的。
+其余文件皆为辅助用途。在此，我推荐用 [Minified][] 这个 JS 库来编写主题，因为默认主题的代码就是基于它的，这个 JS 库十分小巧易用。另外不用担心是否一定要熟悉 Minified 的使用，因为基本上只有 `js/blog/render.js` 这个文件是使用到它的。
 
 至于更详细的说明，直接看源代码就 OK 了，我已经加了必要的注释（蹩脚的英文）。
 
 [Minified]: http://minifiedjs.com
+
 
 ## 计划添加的功能
 
