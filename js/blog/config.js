@@ -54,7 +54,7 @@ define('blog.config', function () {
      * 博客公告栏信息。
      * @type {string}
      */
-    bulletin: 'Welcome to my blog!',
+    bulletin: '<a href="https://github.com/jakwings/Wiedersehen">View on GitHub</a>',
     /**
      * Links on side bar.
      * 博客相关链接。

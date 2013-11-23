@@ -49,6 +49,16 @@ define('blog.render', function () {
     }
   };
   /**
+   * Sets bulletin information.
+   * @return {void}
+   */
+  var setBulletin = function () {
+    var $bulletin = $('#bulletin:empty');
+    if ($bulletin.length > 0) {
+      $bulletin.ht(ENV.config.bulletin);
+    }
+  };
+  /**
    * Adds site links
    * @return {void}
    */
@@ -114,10 +124,18 @@ define('blog.render', function () {
   };
   /**
    * Loads article titles and replace the content.
+   * @param {number=} opt_pageNum page number starting from 1
+   * @default 1
+   * @param {number=} opt_itemNum number of item per page
+   * @default 10
    * @return {void}
    */
-  var loadArticleTitles = function () {
-    var list = ENV.config.articles || [];
+  var loadArticleTitles = function (opt_pageNum, opt_itemNum) {
+    var pageNum = (opt_pageNum && opt_pageNum > 0) ? opt_pageNum : 1;
+    var itemNum = parseInt(opt_itemNum, 10) || 10;
+    var total = Math.ceil((ENV.config.articles || []).length / itemNum);
+    var list = (ENV.config.articles || []).
+        slice(-pageNum*itemNum, -(pageNum-1)*itemNum || undefined);
     var $content = $('#content');
     var $listContainer = EE('ul', {$: 'contents nav nav-tabs nav-stacked'});
     for (var i = 0, l = list.length; i < l; i++) {
@@ -126,7 +144,30 @@ define('blog.render', function () {
         url: ENV.HASH_CAP + list[i].url
       }));
     }
-    $content.fill($listContainer);
+    var $paginationContainer = EE('div', {$: 'pagination'});
+    var $pagination = EE('ul');
+    var $prev = HH('<li><a>Prev</a></li>');
+    var $next = HH('<li><a>Next</a></li>');
+    $pagination.add($prev);
+    var start = (pageNum <= 4) ? 1 : pageNum - 2;
+    for (var i = start; i <= start+4 && i <= total; i++) {
+      $pagination.add(EE('li', {
+        $: i === pageNum ? 'active' : ''
+      }, EE('a', {'@href': ENV.HASH_CAP + i + '/'}, i)));
+    }
+    $pagination.add($next);
+    if (pageNum > 1) {
+      $prev.select('a').set('@href', ENV.HASH_CAP + (pageNum-1) + '/');
+    } else {
+      $prev.set('$', 'disabled');
+    }
+    if (pageNum < total) {
+      $next.select('a').set('@href', ENV.HASH_CAP + (pageNum+1) + '/');
+    } else {
+      $next.set('$', 'disabled');
+    }
+    $paginationContainer.add($pagination);
+    $content.fill([$listContainer, $paginationContainer]);
   };
   /**
    * Loads page content according to hash tags.
@@ -243,11 +284,15 @@ define('blog.render', function () {
    */
   var goHome = function (oldHash, newHash) {
     ENV.DEBUG && console.log(arguments);
+    var pathInfo = newHash.substr(ENV.HASH_CAP.length).split('/', 1);
+    var pageNum = parseInt(pathInfo[0], 10) || 0;
     setDocumentTitle();
-    loadArticleTitles();
-    switchMenuItem(newHash);
-    window.history.replaceState(window.history.state, document.title,
-        ENV.BASE_URL);
+    loadArticleTitles(pageNum);
+    if (newHash === ENV.HASH_CAP || pageNum === 1) {
+      window.history.replaceState(window.history.state, document.title,
+          ENV.BASE_URL);
+    }
+    switchMenuItem(ENV.HASH_CAP);
   };
   var goPage = function (oldHash, newHash) {
     ENV.DEBUG && console.log(arguments);
@@ -304,6 +349,7 @@ define('blog.render', function () {
     document = window.document;
     setTitles();
     setLicense();
+    setBulletin();
     addMenuItems();
     addSiteLinks();
     toggleArticleNavigator();
@@ -316,7 +362,8 @@ define('blog.render', function () {
     }
     // with hash tag of a page
     if (newHash.substr(0, ENV.HASH_CAP.length) === ENV.HASH_CAP) {
-      if (newHash === ENV.HASH_CAP) {
+      var homeTagger = new RegExp('^'+_.escapeRegExp(ENV.HASH_CAP)+'(\\d+/)?$');
+      if (homeTagger.test(newHash)) {
         goHome(oldHash, newHash);
       } else {
         goPage(oldHash, newHash);
