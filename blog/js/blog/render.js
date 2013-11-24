@@ -223,10 +223,11 @@ define('blog.render', function () {
       tables: false,  //need gfm
       breaks: false,  //need gfm
       pedantic: false,
-      sanitize: true,
+      sanitize: false,
       smartLists: true,
       smartypants: false,
-      langPrefix: 'lang-'
+      langPrefix: 'lang-',
+      headerPrefix: '',
     });
     var delimiter = /[\r\n]+---[\r\n]+/;
     var pos = text.search(delimiter);
