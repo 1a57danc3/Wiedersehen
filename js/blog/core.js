@@ -84,18 +84,29 @@
    * @return {void}
    */
   Blog.prototype.route_ = function (evt) {
+    var oldHash;
+    var newHash;
     // gets old hash tag and new hash tag
     if (typeof evt !== 'undefined' && evt instanceof Event) {
       var newMatch = evt.newURL.match(/#.*$/);
       var oldMatch = evt.oldURL.match(/#.*$/);
       // empty hash '' will be mapped to HASH_CAP
-      var newHash = newMatch ? newMatch[0] : this.HASH_CAP;
-      var oldHash = oldMatch ? oldMatch[0] : this.HASH_CAP;
+      newHash = newMatch ? newMatch[0] : this.HASH_CAP;
+      oldHash = oldMatch ? oldMatch[0] : this.HASH_CAP;
     } else {
-      var newHash = evt || this.HASH_CAP;
-      var oldHash = this.window.location.hash || this.HASH_CAP;
+      var window = this.window;
+      var queryTag = (window.location.search.match(/\bhtag=([^&\/]+)/) || [])[1];
+      if (queryTag) {  // with query string
+                       // for compatibility with some comment systems
+        oldHash = newHash = this.HASH_CAP + decodeURIComponent(queryTag);
+        window.history.replaceState(window.history.state, window.document.title,
+            this.BASE_URL + newHash);
+      } else {
+        newHash = evt || this.HASH_CAP;
+        oldHash = window.location.hash || this.HASH_CAP;
+      }
     }
-    this.DEBUG && console.log(oldHash, newHash);
+    this.DEBUG && console.log(queryTag, oldHash, newHash);
     // wraps the environment (not cloning)
     var env = {};
     for (var k in this) {
