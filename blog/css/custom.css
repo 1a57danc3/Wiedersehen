@@ -215,6 +215,9 @@ body {
   #content {
     min-height: 400px;
   }
+  #comments {
+    padding: 0.5em;
+  }
   #main .theme-author {
     display: block;
   }
@@ -234,7 +237,7 @@ body {
 }
 
 @media print, projection {
-  #sidebar-left, #sidebar-right, #main .comments, .theme-author {
+  #sidebar-left, #sidebar-right, #comments, #main .comments, .theme-author {
     display: none !important;
   }
   img {
