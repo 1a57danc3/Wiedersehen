@@ -253,13 +253,8 @@ define('blog.render', function () {
   var togglePageComments = function (opt_url) {
     var $comment = $('#main .comments');
     if (opt_url) {
-      //// duoshuo.com
-      //ENV.config.loadComment(window, $comment[0], opt_url,
-      //    ENV.BASE_URL + '?htag=' + encodeURIComponent(opt_url));
-
-      // normal
       ENV.config.loadComment(window, $comment[0], opt_url,
-          ENV.BASE_URL + ENV.HASH_CAP + opt_url);
+          ENV.BASE_URL + '?htag=' + encodeURIComponent(opt_url));
       $('#main .comments').set('$', '-hide');
     } else {
       $comment.set('$', '+hide').fill();
@@ -341,15 +336,13 @@ define('blog.render', function () {
     addSiteLinks();
     toggleArticleNavigator();
     togglePageComments();
-
     // first visit with invalid hash tag
     if (oldHash === newHash &&
         newHash.substr(0, ENV.HASH_CAP.length) !== ENV.HASH_CAP &&
         $('#content:empty').length > 0) {
       goHome(ENV.HASH_CAP, ENV.HASH_CAP);
-    }
     // with hash tag of a page
-    if (newHash.substr(0, ENV.HASH_CAP.length) === ENV.HASH_CAP) {
+    } else if (newHash.substr(0, ENV.HASH_CAP.length) === ENV.HASH_CAP) {
       var homeTagger = new RegExp('^'+_.escapeRegExp(ENV.HASH_CAP)+'(\\d+/)?$');
       if (homeTagger.test(newHash)) {
         goHome(oldHash, newHash);
