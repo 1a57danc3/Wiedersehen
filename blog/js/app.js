@@ -12,5 +12,5 @@ var MINI = require('minified');
 
 MINI.$(function () {
   var blog = require('blog');
-  blog.init(true);
+  blog.init();
 });
