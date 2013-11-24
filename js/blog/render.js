@@ -118,11 +118,11 @@ define('blog.render', function () {
       $navigator.select('.previous').
           set('$', hasPrev ? '-disabled' : '+disabled').
           select('a').
-          set('@href', hasPrev ? ENV.HASH_CAP + hasPrev : '');
+          set('@href', hasPrev ? ENV.HASH_CAP + hasPrev : null);
       $navigator.select('.next').
           set('$', hasNext ? '-disabled' : '+disabled').
           select('a').
-          set('@href', hasNext ? ENV.HASH_CAP + hasNext : '');
+          set('@href', hasNext ? ENV.HASH_CAP + hasNext : null);
     }
     $navigator.set('$', (hasPrev || hasNext) ? '-shrink +in' : '+shrink -in');
   };
@@ -246,6 +246,11 @@ define('blog.render', function () {
   var togglePageComments = function (opt_url) {
     var $comment = $('#main .comments');
     if (opt_url) {
+      //// duoshuo.com
+      //ENV.config.loadComment(window, $comment[0], opt_url,
+      //    ENV.BASE_URL + '?htag=' + encodeURIComponent(opt_url));
+
+      // normal (not duoshuo.com)
       ENV.config.loadComment(window, $comment[0], opt_url,
           ENV.BASE_URL + ENV.HASH_CAP + opt_url);
       $('#main .comments').set('$', '-hide');
@@ -329,6 +334,15 @@ define('blog.render', function () {
     addSiteLinks();
     toggleArticleNavigator();
     togglePageComments();
+
+    //// duoshuo.com
+    //var queryParam = (window.location.search.match(/\bhtag=([^&]*)/) || [])[1];
+    //if (queryParam) {
+    //  oldHash = newHash = ENV.HASH_CAP + decodeURIComponent(queryParam);
+    //  window.history.replaceState(window.history.state, document.title,
+    //      ENV.BASE_URL + newHash);
+    //}
+
     // first visit with invalid hash tag
     if (oldHash === newHash &&
         newHash.substr(0, ENV.HASH_CAP.length) !== ENV.HASH_CAP &&
