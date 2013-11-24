@@ -8,6 +8,13 @@
 
 
 define('blog.render', function () {
+  var $ = MINI.$;
+  var $$ = MINI.$$;
+  var EE = MINI.EE;
+  var HH = MINI.HTML;
+  var _ = MINI._;
+  var yamlminus = require('yamlminus');
+  var marked = require('marked');
   var window, document, ENV;
   /**
    * Stores the timestamp of AJAX operation to solve asynchronization conflicts.
@@ -250,7 +257,7 @@ define('blog.render', function () {
       //ENV.config.loadComment(window, $comment[0], opt_url,
       //    ENV.BASE_URL + '?htag=' + encodeURIComponent(opt_url));
 
-      // normal (not duoshuo.com)
+      // normal
       ENV.config.loadComment(window, $comment[0], opt_url,
           ENV.BASE_URL + ENV.HASH_CAP + opt_url);
       $('#main .comments').set('$', '-hide');
@@ -334,14 +341,6 @@ define('blog.render', function () {
     addSiteLinks();
     toggleArticleNavigator();
     togglePageComments();
-
-    //// duoshuo.com
-    //var queryParam = (window.location.search.match(/\bhtag=([^&]*)/) || [])[1];
-    //if (queryParam) {
-    //  oldHash = newHash = ENV.HASH_CAP + decodeURIComponent(queryParam);
-    //  window.history.replaceState(window.history.state, document.title,
-    //      ENV.BASE_URL + newHash);
-    //}
 
     // first visit with invalid hash tag
     if (oldHash === newHash &&
