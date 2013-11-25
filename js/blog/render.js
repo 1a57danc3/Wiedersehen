@@ -145,6 +145,7 @@ define('blog.render', function () {
     var pageNum = (opt_pageNum && opt_pageNum > 0) ? opt_pageNum : 1;
     var itemNum = parseInt(opt_itemNum, 10) || 10;
     var total = Math.ceil((ENV.config.articles || []).length / itemNum);
+    /** @type {Array.<{{text, url, file}}>} */
     var list = (ENV.config.articles || []).
         slice(-pageNum*itemNum, -(pageNum-1)*itemNum || undefined);
     var $content = $('#content');
@@ -223,10 +224,11 @@ define('blog.render', function () {
       tables: false,  //need gfm
       breaks: false,  //need gfm
       pedantic: false,
-      sanitize: true,
+      sanitize: false,
       smartLists: true,
       smartypants: false,
-      langPrefix: 'lang-'
+      langPrefix: 'lang-',
+      headerPrefix: '',
     });
     var delimiter = /[\r\n]+---[\r\n]+/;
     var pos = text.search(delimiter);
