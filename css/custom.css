@@ -35,6 +35,9 @@ body {
 }
 
 /* header */
+#title, #subtitle {
+  text-align: center;
+}
 #title {
   font-family: "Andada", sans-serif;
   color: #555555;
