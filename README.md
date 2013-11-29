@@ -1,8 +1,8 @@
 Wiedersehen
 ===========
 
-A super lightweight static weblog system.
+一个轻量级的 AJAX 式静态博客系统。
 
-## Demo
+## 演示兼文档
 
 http://jakwings.github.io/Wiedersehen/#!/i/about
