@@ -341,7 +341,7 @@ define('blog.render', function () {
     newHash = newHash.replace(/^(#[^#]*)#.*$/, '$1');
     var homeTagger = new RegExp('^'+_.escapeRegExp(ENV.HASH_CAP)+'(\\d+/)?$');
     if (oldHash === newHash) {
-      if ($('#content:empty').length <= 0) {
+      if ($('#content:empty').length > 0) {
         togglePageComments();
         if (homeTagger.test(newHash) ||
             newHash.substr(0, ENV.HASH_CAP.length) !== ENV.HASH_CAP) {
