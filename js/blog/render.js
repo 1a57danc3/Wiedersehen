@@ -338,22 +338,29 @@ define('blog.render', function () {
     addSiteLinks();
     toggleArticleNavigator();
     togglePageComments();
-    var hashTag = newHash.replace(/^#[^#]*/, '');
     oldHash = oldHash.replace(/^(#[^#]*)#.*$/, '$1');
     newHash = newHash.replace(/^(#[^#]*)#.*$/, '$1');
-    // first visit with invalid hash tag
-    if (oldHash === newHash &&
-        newHash.substr(0, ENV.HASH_CAP.length) !== ENV.HASH_CAP &&
-        $('#content:empty').length > 0) {
-      goHome(ENV.HASH_CAP, ENV.HASH_CAP);
-    // with hash tag of a page
-    } else if ((!hashTag.length || $('#content:empty').length > 0) &&
-        newHash.substr(0, ENV.HASH_CAP.length) === ENV.HASH_CAP) {
-      var homeTagger = new RegExp('^'+_.escapeRegExp(ENV.HASH_CAP)+'(\\d+/)?$');
-      if (homeTagger.test(newHash)) {
-        goHome(oldHash, newHash);
-      } else {
-        goPage(oldHash, newHash);
+    var homeTagger = new RegExp('^'+_.escapeRegExp(ENV.HASH_CAP)+'(\\d+/)?$');
+    if (oldHash === newHash) {
+      if ($('#content:empty').length <= 0) {
+        if (homeTagger.test(newHash) ||
+            newHash.substr(0, ENV.HASH_CAP.length) !== ENV.HASH_CAP) {
+          goHome(ENV.HASH_CAP, ENV.HASH_CAP);
+        } else {
+          goPage(oldHash, newHash);
+        }
+      }
+    } else {
+      if (newHash.substr(0, ENV.HASH_CAP.length) === ENV.HASH_CAP) {
+        if (homeTagger.test(newHash)) {
+          goHome(oldHash, newHash);
+        } else {
+          goPage(oldHash, newHash);
+        }
+      } else if (newHash.length) {
+        // #abc#def
+        window.history.replaceState(window.history.state, document.title,
+            ENV.BASE_URL + oldHash + newHash);
       }
     }
   };
