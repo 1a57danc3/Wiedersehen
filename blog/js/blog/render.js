@@ -338,6 +338,9 @@ define('blog.render', function () {
     addSiteLinks();
     toggleArticleNavigator();
     togglePageComments();
+    // changes #abc#def to #abc
+    oldHash = oldHash.replace(/^(#[^#]*)#.*$/, '$1');
+    newHash = newHash.replace(/^(#[^#]*)#.*$/, '$1');
     // first visit with invalid hash tag
     if (oldHash === newHash &&
         newHash.substr(0, ENV.HASH_CAP.length) !== ENV.HASH_CAP &&
