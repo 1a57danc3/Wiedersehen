@@ -337,12 +337,12 @@ define('blog.render', function () {
     addMenuItems();
     addSiteLinks();
     toggleArticleNavigator();
-    togglePageComments();
     oldHash = oldHash.replace(/^(#[^#]*)#.*$/, '$1');
     newHash = newHash.replace(/^(#[^#]*)#.*$/, '$1');
     var homeTagger = new RegExp('^'+_.escapeRegExp(ENV.HASH_CAP)+'(\\d+/)?$');
     if (oldHash === newHash) {
       if ($('#content:empty').length <= 0) {
+        togglePageComments();
         if (homeTagger.test(newHash) ||
             newHash.substr(0, ENV.HASH_CAP.length) !== ENV.HASH_CAP) {
           goHome(ENV.HASH_CAP, ENV.HASH_CAP);
@@ -352,6 +352,7 @@ define('blog.render', function () {
       }
     } else {
       if (newHash.substr(0, ENV.HASH_CAP.length) === ENV.HASH_CAP) {
+        togglePageComments();
         if (homeTagger.test(newHash)) {
           goHome(oldHash, newHash);
         } else {
