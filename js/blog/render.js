@@ -347,7 +347,7 @@ define('blog.render', function () {
         $('#content:empty').length > 0) {
       goHome(ENV.HASH_CAP, ENV.HASH_CAP);
     // with hash tag of a page
-    } else if (!hashTag.length &&
+    } else if ((!hashTag.length || $('#content:empty').length > 0) &&
         newHash.substr(0, ENV.HASH_CAP.length) === ENV.HASH_CAP) {
       var homeTagger = new RegExp('^'+_.escapeRegExp(ENV.HASH_CAP)+'(\\d+/)?$');
       if (homeTagger.test(newHash)) {
