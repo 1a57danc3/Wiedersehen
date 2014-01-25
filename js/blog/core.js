@@ -102,8 +102,8 @@
         window.history.replaceState(window.history.state, window.document.title,
             this.BASE_URL + newHash);
       } else {
-        newHash = evt.replace(/^(#.*)#.*$/, '$1') || this.HASH_CAP;
-        oldHash = window.location.hash.replace(/^(#.*)#.*$/, '$1') || this.HASH_CAP;
+        newHash = evt || this.HASH_CAP;
+        oldHash = window.location.hash || this.HASH_CAP;
       }
     }
     this.DEBUG && console.log(queryTag, oldHash, newHash);
