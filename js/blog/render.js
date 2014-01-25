@@ -338,7 +338,7 @@ define('blog.render', function () {
     addSiteLinks();
     toggleArticleNavigator();
     togglePageComments();
-    // changes #abc#def to #abc
+    var hashTag = newHash.replace(/^#[^#]*/, '');
     oldHash = oldHash.replace(/^(#[^#]*)#.*$/, '$1');
     newHash = newHash.replace(/^(#[^#]*)#.*$/, '$1');
     // first visit with invalid hash tag
@@ -347,7 +347,8 @@ define('blog.render', function () {
         $('#content:empty').length > 0) {
       goHome(ENV.HASH_CAP, ENV.HASH_CAP);
     // with hash tag of a page
-    } else if (newHash.substr(0, ENV.HASH_CAP.length) === ENV.HASH_CAP) {
+    } else if (!hashTag.length &&
+        newHash.substr(0, ENV.HASH_CAP.length) === ENV.HASH_CAP) {
       var homeTagger = new RegExp('^'+_.escapeRegExp(ENV.HASH_CAP)+'(\\d+/)?$');
       if (homeTagger.test(newHash)) {
         goHome(oldHash, newHash);
