@@ -343,11 +343,14 @@ define('blog.render', function () {
     if (oldHash === newHash) {
       if ($('#content:empty').length > 0) {
         togglePageComments();
-        if (homeTagger.test(newHash) ||
-            newHash.substr(0, ENV.HASH_CAP.length) !== ENV.HASH_CAP) {
+        if (newHash.substr(0, ENV.HASH_CAP.length) !== ENV.HASH_CAP) {
           goHome(ENV.HASH_CAP, ENV.HASH_CAP);
         } else {
-          goPage(oldHash, newHash);
+          if (homeTagger.test(newHash)) {
+            goHome(oldHash, newHash);
+          } else {
+            goPage(oldHash, newHash);
+          }
         }
       }
     } else {
